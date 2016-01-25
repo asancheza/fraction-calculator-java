@@ -1,19 +1,26 @@
+/**
+ * Fraction class
+ * 
+ * @author Alejandro Sanchez Acosta
+ */
+
 public class Fraction implements FractionInterface {
   private int numerator = 0;
   private int denominator = 1;
 
   public Fraction(Integer numerator, Integer denominator)
   {
-      this.numerator = numerator;
-      this.denominator = denominator;
+    this.numerator = numerator;
+    this.denominator = denominator;
 
-      if (denominator.equals(0)) {
-        throw new IllegalFractionException("Cannot have 0 as denominator");
-      }
+    if (denominator.equals(0)) {
+      throw new IllegalFractionException("Cannot have 0 as denominator");
+    }
   }
 
   public String toString() {
     String fractionString = this.numerator + " / " + this.denominator;
+    
     return fractionString;
   }
 
@@ -32,8 +39,8 @@ public class Fraction implements FractionInterface {
   public FractionInterface subtract(FractionInterface f2) {
     Integer numerator2 = f2.getNumerator();
     Integer denominator2 = f2.getDenominator();
-    Integer numerator3 = numerator * denominator2 - numerator2 * denominator;
-    Integer denominator3 = denominator * denominator2;
+    Integer numerator3 = this.numerator * denominator2 - numerator2 * denominator;
+    Integer denominator3 = this.denominator * denominator2;
 
     FractionInterface result = new Fraction(numerator3, denominator3);
     result.reduceToLowestTerms();
@@ -44,20 +51,24 @@ public class Fraction implements FractionInterface {
   public FractionInterface multiply(FractionInterface f2) {
     Integer numerator2 = f2.getNumerator();
     Integer denominator2 = f2.getDenominator();
-    Integer numerator3 = numerator * numerator2;
-    Integer denominator3 = denominator * denominator2;
+    Integer numerator3 = this.numerator * numerator2;
+    Integer denominator3 = this.denominator * denominator2;
+    
     FractionInterface result = new Fraction(numerator3, denominator3);
     result.reduceToLowestTerms();
+    
     return result;
   }
 
   public FractionInterface divide(FractionInterface f2) {
     Integer numerator2 = f2.getNumerator();
     Integer denominator2 = f2.getDenominator();
-    Integer numerator3 = numerator * denominator2;
-    Integer denominator3 = denominator * numerator2;
+    Integer numerator3 = this.numerator * denominator2;
+    Integer denominator3 = this.denominator * numerator2;
+    
     FractionInterface result = new Fraction(numerator3, denominator3);
     result.reduceToLowestTerms();
+    
     return result;
   }
 
@@ -67,8 +78,8 @@ public class Fraction implements FractionInterface {
     if (gcd < 0) 
       gcd = -gcd;
 
-    numerator = numerator / gcd;
-    denominator = denominator / gcd;
+    this.numerator = this.numerator / gcd;
+    this.denominator = this.denominator / gcd;
   }
 
   private Integer greatestCommonDivisor(Integer a, Integer b) {
@@ -79,11 +90,20 @@ public class Fraction implements FractionInterface {
     }
   }
 
+  /**
+   *
+   * Get numerator
+   *
+   * @return the denominator
+   */
   public Integer getNumerator() {
     return numerator;
   }
 
   /**
+   *
+   * Get denominator
+   *
    * @return the denominator
    */
   public Integer getDenominator() {
@@ -92,26 +112,34 @@ public class Fraction implements FractionInterface {
   }
 
   /**
-   * @param numeratorParameter is the first name.
+   * 
+   * Set numerator
+   *
+   * @param numerator
    */
-  public void setNumerator(Integer numeratorParameter) {
-    // SEt the Data Field.
-    numerator = numeratorParameter;
+  public void setNumerator(Integer numerator) {
+    this.numerator = numerator;
   }
 
   /**
-   * This Is A "Mutator" Method - Used To Set A Data Field.
+   * Set denominator
    * 
-   * @param lastNameParameter is the last name.
+   * @param denominator 
    * @exception IllegalFractionException if the denominator is zero
    */
-  public void setDenominator(Integer denominatorParameter) throws IllegalFractionException {
-    denominator = denominatorParameter;
+  public void setDenominator(Integer denominator) throws IllegalFractionException {
+    this.denominator = denominator;
     if (denominator == 0) {
       throw new IllegalFractionException("Cannot have a denominator that is zero!");
     }
   }
 
+  /**
+   * Compare
+   * 
+   * @param Object 
+   * @exception ClassCastException
+   */
   public int compareTo(Object object2) throws ClassCastException {
     Fraction fraction2 = (Fraction) object2;
     int numerator1 = numerator * fraction2.getDenominator();
