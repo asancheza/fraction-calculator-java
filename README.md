@@ -16,3 +16,7 @@ java FractionCalculator
 - FractionCalculator.java: Fraction example operations.
 - FractionInterface.java: Fraction Interface.
 - IllegalFractionException.java: Custom Exception.
+
+## Documentation
+
+[Checkout the documentation here] (https://htmlpreview.github.io/?https://github.com/asancheza/fraction-calculator-java/blob/master/javadoc/index.html)
