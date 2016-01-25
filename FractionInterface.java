@@ -15,11 +15,11 @@ public interface  FractionInterface {
   
   public void reduceToLowestTerms();
 
-  public Integer getNumerator();
+  public int getNumerator();
 
-  public Integer getDenominator();
+  public int getDenominator();
 
-  public void setNumerator(Integer numerator);
+  public void setNumerator(int numerator);
 
-  public void setDenominator(Integer numerator);
+  public void setDenominator(int numerator);
 }

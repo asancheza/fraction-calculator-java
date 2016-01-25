@@ -8,72 +8,105 @@ public class Fraction implements FractionInterface {
   private int numerator = 0;
   private int denominator = 1;
 
-  public Fraction(Integer numerator, Integer denominator)
+  /**
+   *
+   * Fraction constructor
+   *
+   */
+  public Fraction(int numerator, int denominator)
   {
     this.numerator = numerator;
     this.denominator = denominator;
 
-    if (denominator.equals(0)) {
+    if (this.denominator == 0) {
       throw new IllegalFractionException("Cannot have 0 as denominator");
     }
   }
 
+  /**
+   *
+   * Convert fraction to string
+   *
+   * @return the fraction string
+   */
   public String toString() {
-    String fractionString = this.numerator + " / " + this.denominator;
+    String fractionString = this.getNumerator() + " / " + this.getDenominator();
     
     return fractionString;
   }
 
+  /**
+   *
+   * Add fractions
+   *
+   * @return the fraction added
+   */
   public FractionInterface add(FractionInterface f2) {
-    Integer numerator2 = f2.getNumerator();
-    Integer denominator2 = f2.getDenominator();
-    Integer numerator3 = this.numerator * denominator2 + numerator2 * this.denominator;
-    Integer denominator3 = this.denominator * denominator2;
+    int numerator = this.getNumerator() * f2.getDenominator() + f2.getNumerator() * this.getDenominator();
+    int denominator = this.denominator * f2.getDenominator();
 
-    FractionInterface result = new Fraction(numerator3, denominator3);
+    FractionInterface result = new Fraction(numerator, denominator);
     result.reduceToLowestTerms();
 
     return result;
   }
 
+  /**
+   *
+   * Subtract fractions
+   *
+   * @return the fraction subtracted
+   */
   public FractionInterface subtract(FractionInterface f2) {
-    Integer numerator2 = f2.getNumerator();
-    Integer denominator2 = f2.getDenominator();
-    Integer numerator3 = this.numerator * denominator2 - numerator2 * denominator;
-    Integer denominator3 = this.denominator * denominator2;
+    int numerator = this.getNumerator() * f2.getDenominator() - f2.getNumerator() * this.getDenominator();
+    int denominator = this.getDenominator() * f2.getDenominator();;
 
-    FractionInterface result = new Fraction(numerator3, denominator3);
+    FractionInterface result = new Fraction(numerator, denominator);
     result.reduceToLowestTerms();
 
     return result;
   }
 
+  /**
+   *
+   * Multiply fractions
+   *
+   * @return the fraction multiplied
+   */
   public FractionInterface multiply(FractionInterface f2) {
-    Integer numerator2 = f2.getNumerator();
-    Integer denominator2 = f2.getDenominator();
-    Integer numerator3 = this.numerator * numerator2;
-    Integer denominator3 = this.denominator * denominator2;
+    int numerator = this.getNumerator() * f2.getNumerator();
+    int denominator = this.getDenominator() * f2.getDenominator();
     
-    FractionInterface result = new Fraction(numerator3, denominator3);
+    FractionInterface result = new Fraction(numerator, denominator);
     result.reduceToLowestTerms();
     
     return result;
   }
 
+  /**
+   *
+   * Divide fractions
+   *
+   * @return the fraction divided
+   */
   public FractionInterface divide(FractionInterface f2) {
-    Integer numerator2 = f2.getNumerator();
-    Integer denominator2 = f2.getDenominator();
-    Integer numerator3 = this.numerator * denominator2;
-    Integer denominator3 = this.denominator * numerator2;
+    int numerator = this.getNumerator() * f2.getNumerator();
+    int denominator = this.getDenominator() * f2.getDenominator();
     
-    FractionInterface result = new Fraction(numerator3, denominator3);
+    FractionInterface result = new Fraction(numerator, denominator);
     result.reduceToLowestTerms();
     
     return result;
   }
 
+  /**
+   *
+   * Reduce fraction
+   *
+   * @return the fraction reduced
+   */
   public void reduceToLowestTerms() {
-    Integer gcd = this.greatestCommonDivisor(numerator, denominator);
+    int gcd = this.greatestCommonDivisor(this.getNumerator(), this.getDenominator());
 
     if (gcd < 0) 
       gcd = -gcd;
@@ -82,7 +115,13 @@ public class Fraction implements FractionInterface {
     this.denominator = this.denominator / gcd;
   }
 
-  private Integer greatestCommonDivisor(Integer a, Integer b) {
+  /**
+   *
+   * Get greatest common divisor
+   *
+   * @return the gcd
+   */
+  private int greatestCommonDivisor(int a, int b) {
     if ((a % b) == 0) {
       return b;
     } else {
@@ -96,7 +135,7 @@ public class Fraction implements FractionInterface {
    *
    * @return the denominator
    */
-  public Integer getNumerator() {
+  public int getNumerator() {
     return numerator;
   }
 
@@ -106,8 +145,7 @@ public class Fraction implements FractionInterface {
    *
    * @return the denominator
    */
-  public Integer getDenominator() {
-    // Return the Data Field.
+  public int getDenominator() {
     return denominator;
   }
 
@@ -117,7 +155,7 @@ public class Fraction implements FractionInterface {
    *
    * @param numerator
    */
-  public void setNumerator(Integer numerator) {
+  public void setNumerator(int numerator) {
     this.numerator = numerator;
   }
 
@@ -127,8 +165,9 @@ public class Fraction implements FractionInterface {
    * @param denominator 
    * @exception IllegalFractionException if the denominator is zero
    */
-  public void setDenominator(Integer denominator) throws IllegalFractionException {
+  public void setDenominator(int denominator) throws IllegalFractionException {
     this.denominator = denominator;
+
     if (denominator == 0) {
       throw new IllegalFractionException("Cannot have a denominator that is zero!");
     }
@@ -142,9 +181,10 @@ public class Fraction implements FractionInterface {
    */
   public int compareTo(Object object2) throws ClassCastException {
     Fraction fraction2 = (Fraction) object2;
-    int numerator1 = numerator * fraction2.getDenominator();
-    int numerator2 = fraction2.getNumerator() * denominator;
+    int numerator1 = this.getNumerator() * fraction2.getDenominator();
+    int numerator2 = fraction2.getNumerator() * this.getDenominator();
     int result = numerator1 - numerator2;
+
     return result;
   }
 }

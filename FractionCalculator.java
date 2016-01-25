@@ -7,7 +7,6 @@
 import javax.swing.JOptionPane;
 
 public class FractionCalculator {
-
   /**
    * main() method: begins program
    * 
@@ -23,9 +22,10 @@ public class FractionCalculator {
     String number2 = JOptionPane.showInputDialog("Please enter the denominator");
     String number3 = JOptionPane.showInputDialog("Please enter the 2nd numerator");
     String number4 = JOptionPane.showInputDialog("Please enter the 2nd denominator");
+    
     try {
-      Integer numerator = Integer.parseInt(number1);
-      Integer denominator = Integer.parseInt(number2);
+      int numerator = Integer.parseInt(number1);
+      int denominator = Integer.parseInt(number2);
 
       // Set first Fraction object
       fraction1.setNumerator(numerator);
@@ -65,8 +65,8 @@ public class FractionCalculator {
       JOptionPane.showMessageDialog(null, "Please enter a whole number.");
     }
 
-    catch (IllegalFractionException exception2) {
-      String message = exception2.toString();
+    catch (IllegalFractionException exception) {
+      String message = exception.toString();
       JOptionPane.showMessageDialog(null, message);
     }
   }
