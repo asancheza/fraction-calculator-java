@@ -174,7 +174,7 @@ public class Fraction implements FractionInterface {
   }
 
   /**
-   * Compare
+   * Compare fractions
    * 
    * @param Object 
    * @exception ClassCastException
@@ -186,5 +186,14 @@ public class Fraction implements FractionInterface {
     int result = numerator1 - numerator2;
 
     return result;
+  }
+
+  /**
+   * Reciprocal method returns the recriprocal fraction
+   * 
+   * @return new Fraction
+   */
+  public Fraction reciprocal() {
+    return new Fraction(this.getDenominator(), this.getNumerator());
   }
 }
